@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  scraper.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ScraperDatabaseSettings_ConnectionString=mongodb://mongoDb:27017
+    ports:
+      - "666:80"
+      - "777:443"
+    depends_on:   
+      - mongoDb
+
+  mongoDb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=p@ssword
