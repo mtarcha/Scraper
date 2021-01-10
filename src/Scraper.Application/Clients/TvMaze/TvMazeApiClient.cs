@@ -21,7 +21,6 @@ namespace Scraper.Application.Clients.TvMaze
         public async Task<IEnumerable<long>> GetShowIdsAsync(long pageNumber, CancellationToken token)
         {
             var path = $"shows?page={pageNumber}";
-            //todo: use Polly to retry if 429 error
             var response = await _httpClient.GetAsync(path, token);
 
             if (response.StatusCode == HttpStatusCode.NotFound)
@@ -35,7 +34,6 @@ namespace Scraper.Application.Clients.TvMaze
         public async Task<Show> GetShowAsync(long id, CancellationToken token)
         {
             var path = $"shows/{id}?embed=cast";
-            //todo: use Polly to retry if 429 error
             var response = await _httpClient.GetAsync(path, token);
 
             response.EnsureSuccessStatusCode();

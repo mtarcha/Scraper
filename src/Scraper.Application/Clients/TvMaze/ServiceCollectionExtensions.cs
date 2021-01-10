@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
+using Polly;
+using Polly.Extensions.Http;
 
 
 namespace Scraper.Application.Clients.TvMaze
@@ -17,7 +20,15 @@ namespace Scraper.Application.Clients.TvMaze
             {
                 var options = serviceProvider.GetService<IOptions<TvMazeApiSettings>>().Value;
                 httpClient.BaseAddress = new Uri(options.BaseUrl);
-            });
+            }).AddPolicyHandler(GetRetryPolicy());
+        }
+
+        static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .OrResult(msg => msg.StatusCode == (System.Net.HttpStatusCode)429)
+                .WaitAndRetryAsync(7, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
         }
     }
 }
