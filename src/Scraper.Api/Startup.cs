@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Linq;
+using AutoMapper;
+using AutoMapper.Configuration;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Scraper.Api.Mappings;
 using Scraper.Api.Services;
 using Scraper.Application.Clients.TvMaze;
 using Scraper.Application.Commands;
 using Scraper.Infrastructure.Mongo;
 using Swashbuckle.AspNetCore.Swagger;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Scraper.Api
 {
@@ -32,6 +35,17 @@ namespace Scraper.Api
 
             var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             services.AddMediatR(allAssemblies);
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfiles(new Profile[]
+                {
+                    new ViewModelsMapper(),
+                });
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services
                 .AddSwaggerGen(c =>
