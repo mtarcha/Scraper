@@ -10,6 +10,7 @@ using Scraper.Api.Services;
 using Scraper.Application.Clients.TvMaze;
 using Scraper.Application.Commands;
 using Scraper.Infrastructure.Mongo;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Scraper.Api
 {
@@ -30,7 +31,25 @@ namespace Scraper.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            services.AddMediatR(typeof(AddNewShowsCommandHandler));
+            services.AddMediatR(allAssemblies);
+
+            services
+                .AddSwaggerGen(c =>
+                {
+                    c.DescribeAllEnumsAsStrings();
+
+                    c.SwaggerDoc("v1", new Info
+                    {
+                        Version = "v1",
+                        Title = "Scraper Api",
+                        Contact = new Contact
+                        {
+                            Name = "Scraper",
+                            Email = "mtarcha@outlook.com",
+                            Url = "https://github.com/mtarcha/Scraper"
+                        }
+                    });
+                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -46,6 +65,11 @@ namespace Scraper.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Scraper V1");
+            });
         }
     }
 }

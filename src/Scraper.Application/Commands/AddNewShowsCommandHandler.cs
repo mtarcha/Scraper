@@ -55,7 +55,7 @@ namespace Scraper.Application.Commands
                                 Id = c.Person.Id,
                                 Name = c.Person.Name,
                                 Birthday = c.Person.Birthday
-                            })
+                            }).OrderByDescending(x => x.Birthday)
                         }, cancellationToken);
 
                         if (cancellationToken.IsCancellationRequested)

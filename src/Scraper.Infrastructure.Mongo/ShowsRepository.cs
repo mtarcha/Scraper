@@ -28,9 +28,12 @@ namespace Scraper.Infrastructure.Mongo
             await _mongoCollection.InsertOneAsync(model, cancellationToken: token);
         }
 
-        public Task<IEnumerable<Show>> GetAsync(int skip, int take, CancellationToken token)
+        public async Task<IEnumerable<Show>> GetAsync(int skip, int take, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            var filterBuilder = new FilterDefinitionBuilder<Show>();
+            var findFluent = _mongoCollection.Find(filterBuilder.Empty).Limit(take).Skip(skip);
+
+            return await findFluent.ToListAsync(token);
         }
 
         public async Task<long> CountAsync(CancellationToken token)
