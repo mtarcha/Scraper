@@ -3,7 +3,7 @@
 ## Prerequisites
 * docker 
 * docker-compose
-* .NET Core SDK 2.2.107
+* .NET Core SDK 2.2.0
 
 # What was used
 ## Tech Stack:

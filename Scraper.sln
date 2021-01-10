@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scraper.Api", "src\Scraper.Api\Scraper.Api.csproj", "{F13C25D3-6899-41E6-A308-38653860398E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper.Domain", "src\Scraper.Domain\Scraper.Domain.csproj", "{E78F41BA-6E7F-4ABC-BFB4-B8417A0C7B37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scraper.Domain", "src\Scraper.Domain\Scraper.Domain.csproj", "{E78F41BA-6E7F-4ABC-BFB4-B8417A0C7B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper.Infrastructure.Mongo", "src\Scraper.Infrastructure.Mongo\Scraper.Infrastructure.Mongo.csproj", "{FB3D0B2E-A0FC-43C0-86CC-9A1CB311E5A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scraper.Infrastructure.Mongo", "src\Scraper.Infrastructure.Mongo\Scraper.Infrastructure.Mongo.csproj", "{FB3D0B2E-A0FC-43C0-86CC-9A1CB311E5A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper.Application", "src\Scraper.Application\Scraper.Application.csproj", "{A941C055-6751-40E0-A8D8-5217910A9F5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scraper.Application", "src\Scraper.Application\Scraper.Application.csproj", "{A941C055-6751-40E0-A8D8-5217910A9F5C}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B77042CD-1770-4050-9D16-3C67E638F64E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper.Application.UnitTests", "tests\Scrapper.Application.UnitTests\Scraper.Application.UnitTests.csproj", "{6B4A47F4-EA69-4573-8C41-941AA980196B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B77042CD-1770-4050-9D16-3C67E638F64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B77042CD-1770-4050-9D16-3C67E638F64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B77042CD-1770-4050-9D16-3C67E638F64E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

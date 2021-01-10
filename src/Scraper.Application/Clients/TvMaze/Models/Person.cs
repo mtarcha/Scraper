@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace Scraper.Application.Clients.TvMaze.Models
 {
