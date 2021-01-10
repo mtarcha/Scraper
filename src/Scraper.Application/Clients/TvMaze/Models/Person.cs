@@ -1,6 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
 
-namespace Scraper.Domain.Models
+namespace Scraper.Application.Clients.TvMaze.Models
 {
     public class Person
     {

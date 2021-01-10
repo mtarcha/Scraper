@@ -6,8 +6,10 @@ namespace Scraper.Domain
 {
     public interface IRepository<TModel>
     {
-        Task AddAsync(IEnumerable<TModel> models, CancellationToken token);
+        Task AddAsync(TModel model, CancellationToken token);
 
         Task<IEnumerable<TModel>> GetAsync(int skip, int take, CancellationToken token);
+
+        Task<long> CountAsync(CancellationToken token);
     }
 }
