@@ -47,8 +47,8 @@ namespace Scraper.Infrastructure.Mongo
             var filterBuilder = new FilterDefinitionBuilder<Show>();
             var findFluent = _mongoCollection.Find(filterBuilder.Empty).SortByDescending(x => x.Id).Limit(1);
 
-            var lastAddedShow = await findFluent.FirstAsync(cancellationToken: token);
-            return lastAddedShow.Id;
+            var lastAddedShow = await findFluent.FirstOrDefaultAsync(cancellationToken: token);
+            return lastAddedShow?.Id ?? -1;
         }
     }
 }

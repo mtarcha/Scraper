@@ -64,7 +64,11 @@ namespace Scraper.Api
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(configuration =>
+            {
+                configuration.MapRoute("Default", "{controller=Shows}/{action=Get}");
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

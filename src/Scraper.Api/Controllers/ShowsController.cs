@@ -18,8 +18,8 @@ namespace Scraper.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get(
-            [FromQuery(Name = "skip")] int skip,
-            [FromQuery(Name = "take")] int take)
+            [FromQuery(Name = "skip")] int skip = 0,
+            [FromQuery(Name = "take")] int take = 10)
         {
             if (take > 500)
                 return BadRequest("Api can return 500 or less tv shows per call.");
@@ -29,6 +29,17 @@ namespace Scraper.Api.Controllers
                 Skip = skip,
                 Take = take
             };
+
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("count")]
+        public async Task<IActionResult> GetCount()
+        {
+            var query = new GetShowsCountQuery();
 
             var result = await _mediator.Send(query);
 

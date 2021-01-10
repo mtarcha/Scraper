@@ -24,6 +24,9 @@ namespace Scraper.Api.Services
         {
             _logger.LogInformation("Update shows scheduler running.");
 
+            // for DB warm up if needed
+            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
+
             while (true)
             {
                 _logger.LogInformation("New update started");
