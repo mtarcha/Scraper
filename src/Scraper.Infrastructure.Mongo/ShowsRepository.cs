@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 using Scraper.Domain;
 using Scraper.Domain.Models;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Scraper.Infrastructure.Mongo
 {
-    public class ShowsRepository : IShowRepository
+    public sealed class ShowsRepository : IShowRepository
     {
-        private IMongoCollection<Show> _mongoCollection;
+        private readonly IMongoCollection<Show> _mongoCollection;
 
         public ShowsRepository(IOptions<ScraperDatabaseSettings> options)
         {
@@ -30,6 +28,9 @@ namespace Scraper.Infrastructure.Mongo
 
         public async Task<IEnumerable<Show>> GetAsync(int skip, int take, CancellationToken token)
         {
+            if(take == 0)
+                return new Show[0];
+
             var filterBuilder = new FilterDefinitionBuilder<Show>();
             var findFluent = _mongoCollection.Find(filterBuilder.Empty).Limit(take).Skip(skip);
 

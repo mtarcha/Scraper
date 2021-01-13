@@ -9,7 +9,7 @@ using Scraper.Application.Commands;
 
 namespace Scraper.Api.Services
 {
-    public class UpdateShowsScheduler : IHostedService
+    public sealed class UpdateShowsScheduler : IHostedService
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<UpdateShowsScheduler> _logger;
@@ -23,9 +23,6 @@ namespace Scraper.Api.Services
         public async Task StartAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Update shows scheduler running.");
-
-            // for DB warm up if needed
-            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
 
             while (true)
             {

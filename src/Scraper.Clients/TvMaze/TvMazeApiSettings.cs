@@ -1,4 +1,4 @@
-﻿namespace Scraper.Application.Clients.TvMaze
+﻿namespace Scraper.Clients.TvMaze
 {
     public class TvMazeApiSettings
     {

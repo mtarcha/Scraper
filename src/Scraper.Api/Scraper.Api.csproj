@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -20,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Scraper.Application\Scraper.Application.csproj" />
+    <ProjectReference Include="..\Scraper.Clients\Scraper.Clients.csproj" />
     <ProjectReference Include="..\Scraper.Domain\Scraper.Domain.csproj" />
     <ProjectReference Include="..\Scraper.Infrastructure.Mongo\Scraper.Infrastructure.Mongo.csproj" />
   </ItemGroup>

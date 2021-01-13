@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using Scraper.Application.Clients.TvMaze;
-using Scraper.Application.Clients.TvMaze.Models;
 using Scraper.Application.Commands;
+using Scraper.Clients.TvMaze;
+using Scraper.Clients.TvMaze.Models;
 using Scraper.Domain;
 
 namespace Scraper.Application.UnitTests
@@ -26,9 +25,8 @@ namespace Scraper.Application.UnitTests
         {
             _mockApiClient = new Mock<ITvMazeApiClient>();
             _mockShowRepository = new Mock<IShowRepository>();
-            var mockLogger = new Mock<ILogger<AddNewShowsCommandHandler>>();
-
-            _addNewShowsCommandHandler = new AddNewShowsCommandHandler(_mockApiClient.Object, _mockShowRepository.Object, mockLogger.Object);
+            
+            _addNewShowsCommandHandler = new AddNewShowsCommandHandler(_mockApiClient.Object, _mockShowRepository.Object);
         }
 
         [TestCase(-1, 3)]

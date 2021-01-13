@@ -1,24 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Scraper.Api.ViewModels;
 using Scraper.Application.Queries;
+using System.Threading.Tasks;
 
 namespace Scraper.Api.Controllers
 {
     [ApiController]
-    [Route("shows")]
-    public class ShowsController : Controller
+    [Route("api/shows")]
+    public sealed class ShowsController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public ShowsController(IMediator mediator, IMapper mapper)
+        public ShowsController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -37,7 +32,7 @@ namespace Scraper.Api.Controllers
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<IEnumerable<Show>>(result));
+            return Ok(result);
         }
 
         [HttpGet]

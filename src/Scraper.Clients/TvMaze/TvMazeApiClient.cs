@@ -5,9 +5,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Scraper.Application.Clients.TvMaze.Models;
+using Scraper.Clients.TvMaze.Models;
 
-namespace Scraper.Application.Clients.TvMaze
+namespace Scraper.Clients.TvMaze
 {
     public class TvMazeApiClient : ITvMazeApiClient
     {

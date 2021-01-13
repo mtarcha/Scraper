@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scraper.Application.Clients.TvMaze.Models
+namespace Scraper.Clients.TvMaze.Models
 {
     public class Person
     {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Scraper.Application.Clients.TvMaze.Models
+namespace Scraper.Clients.TvMaze.Models
 {
     public class Show
     {

@@ -5,16 +5,20 @@
 * docker-compose
 * .NET Core SDK 2.2.0
 
+After lunch by docker-compose
+Application API can be investigate by url: http://localhost:666/swagger/
+MongoDb: http://localhost:8081/db/Scraper/Shows 
+
 # What was used
 ## Tech Stack:
-* ASP.NTET Core
+* ASP.NET Core
 * Docker
 * Docker Compose
-* Automapper
 * MediatR
 * NUnit
-* NSubstitute
+* Moq
 * Swagger
+* Polly
 
 ## Principles:
 * SOLID

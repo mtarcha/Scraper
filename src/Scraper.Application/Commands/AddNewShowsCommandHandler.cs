@@ -1,31 +1,27 @@
-﻿using System;
+﻿using MediatR;
+using Scraper.Domain;
+using Scraper.Domain.Models;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
-using Microsoft.Extensions.Logging;
-using Scraper.Application.Clients.TvMaze;
-using Scraper.Domain;
-using Scraper.Domain.Models;
+using Scraper.Clients.TvMaze;
 
 namespace Scraper.Application.Commands
 {
-    public class AddNewShowsCommandHandler : IRequestHandler<AddNewShowsCommand>
+    public sealed class AddNewShowsCommandHandler : IRequestHandler<AddNewShowsCommand>
     {
         private const int ShowsPerPage = 250;
 
         private readonly ITvMazeApiClient _tvMazeApiClient;
         private readonly IShowRepository _repository;
-        private readonly ILogger<AddNewShowsCommandHandler> _logger;
 
         public AddNewShowsCommandHandler(
             ITvMazeApiClient tvMazeApiClient,
-            IShowRepository repository,
-            ILogger<AddNewShowsCommandHandler> logger)
+            IShowRepository repository)
         {
             _tvMazeApiClient = tvMazeApiClient;
             _repository = repository;
-            _logger = logger;
         }
 
         public async Task<Unit> Handle(AddNewShowsCommand request, CancellationToken cancellationToken)
@@ -37,43 +33,31 @@ namespace Scraper.Application.Commands
             {
                 var showIds = await _tvMazeApiClient.GetShowIdsAsync(page, cancellationToken);
 
-                if(!showIds.Any())
-                    break;
-
                 foreach (var nextShowId in showIds.Where(x => x > lastAddedShowId))
                 {
-                    try
-                    {
-                        var show = await _tvMazeApiClient.GetShowAsync(nextShowId, cancellationToken);
+                    var show = await _tvMazeApiClient.GetShowAsync(nextShowId, cancellationToken);
 
-                        await _repository.AddAsync(new Show
+                    await _repository.AddAsync(new Show
+                    {
+                        Id = show.Id,
+                        Name = show.Name,
+                        Cast = show.Embedded?.Cast?.OrderByDescending(x => x.Person.Birthday).Select(c => new Person
                         {
-                            Id = show.Id,
-                            Name = show.Name,
-                            Cast = show.Embedded?.Cast?.Select(c => new Person
-                            {
-                                Id = c.Person.Id,
-                                Name = c.Person.Name,
-                                Birthday = c.Person.Birthday
-                            }).OrderByDescending(x => x.Birthday)
-                        }, cancellationToken);
+                            Id = c.Person.Id,
+                            Name = c.Person.Name,
+                            Birthday = c.Person.Birthday?.ToString("yyyy-MM-dd")
+                        })
+                    }, cancellationToken);
 
-                        if (cancellationToken.IsCancellationRequested)
-                            break;
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Failed fetch show data from TvMaze");
-                    }
+                    if (cancellationToken.IsCancellationRequested)
+                        return Unit.Value;
                 }
 
-                if (cancellationToken.IsCancellationRequested)
-                    break;
+                if (cancellationToken.IsCancellationRequested || !showIds.Any())
+                    return Unit.Value;
 
                 page++;
             }
-
-            return Unit.Value;
         }
     }
 }

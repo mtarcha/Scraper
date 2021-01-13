@@ -7,7 +7,7 @@ using Scraper.Domain.Models;
 
 namespace Scraper.Application.Queries
 {
-    public class GetShowsQueryHandler : IRequestHandler<GetShowsQuery, IEnumerable<Show>>
+    public sealed class GetShowsQueryHandler : IRequestHandler<GetShowsQuery, IEnumerable<Show>>
     {
         private readonly IShowRepository _repository;
 

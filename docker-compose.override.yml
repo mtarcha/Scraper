@@ -3,12 +3,12 @@ version: '3.4'
 services:
   scraper.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ScraperDatabaseSettings__ConnectionString=mongodb://root:example@mongo:27017
+      ASPNETCORE_ENVIRONMENT: Development
+      ScraperDatabaseSettings__ConnectionString: mongodb://root:example@mongo:27017
     ports:
-      - "666:80"
-      - "777:443"
-    depends_on:   
+      - 666:80
+      - 777:443
+    depends_on:
       - mongo
   mongo:
     image: mongo
@@ -19,10 +19,8 @@ services:
       MONGO_INITDB_DATABASE: Scraper
     ports:
       - 27017:27017
-    volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
-  mongo-express:
+  mongo.express:
     image: mongo-express
     restart: always
     ports:

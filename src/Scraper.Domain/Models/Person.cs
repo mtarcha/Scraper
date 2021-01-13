@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Scraper.Domain.Models
+﻿namespace Scraper.Domain.Models
 {
     public class Person
     {
@@ -8,6 +6,6 @@ namespace Scraper.Domain.Models
 
         public string Name { get; set; }
 
-        public DateTime? Birthday { get; set; }
+        public string Birthday { get; set; }
     }
 }

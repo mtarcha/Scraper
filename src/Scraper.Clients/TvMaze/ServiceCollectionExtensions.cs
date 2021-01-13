@@ -6,8 +6,7 @@ using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Extensions.Http;
 
-
-namespace Scraper.Application.Clients.TvMaze
+namespace Scraper.Clients.TvMaze
 {
     public static class ServiceCollectionExtensions
     {

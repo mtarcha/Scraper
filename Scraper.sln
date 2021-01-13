@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scraper.Application", "src\
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B77042CD-1770-4050-9D16-3C67E638F64E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper.Application.UnitTests", "tests\Scrapper.Application.UnitTests\Scraper.Application.UnitTests.csproj", "{6B4A47F4-EA69-4573-8C41-941AA980196B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scraper.Application.UnitTests", "tests\Scrapper.Application.UnitTests\Scraper.Application.UnitTests.csproj", "{6B4A47F4-EA69-4573-8C41-941AA980196B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scraper.Clients", "src\Scraper.Clients\Scraper.Clients.csproj", "{8AE55811-2243-43C7-9A91-E08D5E7DADB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B4A47F4-EA69-4573-8C41-941AA980196B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE55811-2243-43C7-9A91-E08D5E7DADB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE55811-2243-43C7-9A91-E08D5E7DADB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE55811-2243-43C7-9A91-E08D5E7DADB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE55811-2243-43C7-9A91-E08D5E7DADB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

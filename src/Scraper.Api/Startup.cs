@@ -1,23 +1,18 @@
-﻿using System;
-using System.Linq;
-using AutoMapper;
-using AutoMapper.Configuration;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Scraper.Api.Mappings;
 using Scraper.Api.Services;
-using Scraper.Application.Clients.TvMaze;
 using Scraper.Application.Commands;
+using Scraper.Clients.TvMaze;
 using Scraper.Infrastructure.Mongo;
 using Swashbuckle.AspNetCore.Swagger;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Scraper.Api
 {
-    public class Startup
+    public sealed class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -33,19 +28,7 @@ namespace Scraper.Api
             services.AddTvMazeClient(Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            services.AddMediatR(allAssemblies);
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfiles(new Profile[]
-                {
-                    new ViewModelsMapper(),
-                });
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddMediatR(typeof(AddNewShowsCommandHandler));
 
             services
                 .AddSwaggerGen(c =>
@@ -78,10 +61,7 @@ namespace Scraper.Api
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc(configuration =>
-            {
-                configuration.MapRoute("Default", "{controller=Shows}/{action=Get}");
-            });
+            app.UseMvc();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Scraper.Application.Clients.TvMaze.Models;
+using Scraper.Clients.TvMaze.Models;
 
-namespace Scraper.Application.Clients.TvMaze
+namespace Scraper.Clients.TvMaze
 {
     public interface ITvMazeApiClient
     {

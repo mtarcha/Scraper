@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Scraper.Domain;
-using Scraper.Domain.Models;
 
 namespace Scraper.Application.Queries
 {
-    public class GetShowsCountQueryHandler : IRequestHandler<GetShowsCountQuery, long>
+    public sealed class GetShowsCountQueryHandler : IRequestHandler<GetShowsCountQuery, long>
     {
         private readonly IShowRepository _showRepository;
 

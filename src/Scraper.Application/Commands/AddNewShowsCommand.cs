@@ -2,7 +2,7 @@
 
 namespace Scraper.Application.Commands
 {
-    public class AddNewShowsCommand : IRequest
+    public sealed class AddNewShowsCommand : IRequest
     {
     }
 }
